@@ -1,0 +1,19 @@
+{
+  "name": "imbrexer",
+  "version": "0.0.0",
+  "description": "The Imbrexer Protocol",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dappcentral/protocol.git"
+  },
+  "author": "Brock Haugen <brock@haugen.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dappcentral/protocol/issues"
+  },
+  "homepage": "https://github.com/dappcentral/protocol#readme"
+}
