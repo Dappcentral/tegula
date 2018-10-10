@@ -1,2 +1,1 @@
-# protocol
-The Imbrexer Protocol
+# The Imbrexer Protocol
