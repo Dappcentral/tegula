@@ -27,5 +27,9 @@
     "eslint-plugin-prettier": "^3.0.0",
     "prettier": "^1.14.3",
     "rollup": "^0.66.5"
+  },
+  "dependencies": {
+    "ipfs": "^0.32.3",
+    "orbit-db": "^0.19.9"
   }
 }
