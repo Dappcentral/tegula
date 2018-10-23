@@ -2,10 +2,11 @@
   "name": "imbrexer",
   "version": "0.0.1",
   "description": "The Imbrexer Protocol",
-  "main": "dist/index.js",
+  "main": "dist/index.min.js",
   "scripts": {
-    "build": "rollup src/index.js --format umd --name imbrexer --file dist/index.js",
+    "build": "gulp",
     "lint": "eslint . --fix",
+    "prepublish": "npm run build",
     "test": "npm test"
   },
   "repository": {
@@ -19,14 +20,24 @@
   },
   "homepage": "https://github.com/dappcentral/protocol#readme",
   "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/runtime": "^7.1.2",
+    "del": "^3.0.0",
     "eslint": "^5.7.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^3.1.0",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-prettier": "^3.0.0",
-    "prettier": "^1.14.3",
-    "rollup": "^0.66.5"
+    "gulp": "^4.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.1",
+    "prettier": "^1.14.3"
   },
   "dependencies": {
     "crypto-js": "^3.1.9-1",
