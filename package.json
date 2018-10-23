@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "rollup src/index.js --format umd --name imbrexer --file dist/index.js",
+    "lint": "eslint . --fix",
     "test": "npm test"
   },
   "repository": {
@@ -18,6 +19,17 @@
   },
   "homepage": "https://github.com/dappcentral/protocol#readme",
   "devDependencies": {
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "prettier": "^1.14.3",
     "rollup": "^0.66.5"
+  },
+  "dependencies": {
+    "ipfs": "^0.32.3",
+    "orbit-db": "^0.19.9"
   }
 }

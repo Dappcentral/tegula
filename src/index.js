@@ -1,1 +1,5 @@
-console.log('Hello World');
+const Decentralizer = require("./decentralizer");
+
+module.exports = {
+  Decentralizer,
+};
