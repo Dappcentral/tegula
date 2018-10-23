@@ -5,6 +5,7 @@ const run = async () => {
     // initialize
     const i = new Identifier();
     await i.initialize();
+
     // normalize address
     const normalized = await i.normalizeAddress(
       "123 APPLE STREET, new york, ny 12345",
