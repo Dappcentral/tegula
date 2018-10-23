@@ -1,6 +1,6 @@
 {
   "name": "imbrexer",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "The Imbrexer Protocol",
   "main": "dist/index.min.js",
   "scripts": {
