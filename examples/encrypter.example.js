@@ -1,9 +1,9 @@
-const { Encrypter } = require("../src");
+const Protocol = require("../src");
 
 const run = async () => {
   try {
     // initialize
-    const e = new Encrypter();
+    const e = new Protocol()._encrypter;
     await e.initialize();
 
     const ek = await e.generate();

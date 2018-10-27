@@ -19,10 +19,16 @@ module.exports = class Decentralizer {
         ...config.orbitdbOptions,
       },
     };
+
+    this.isInitialized = false;
   }
 
   // define an async method for initializing IPFS and OrbitDb
   async initialize() {
+    if (this.isInitialized) {
+      return true;
+    }
+
     // create the ipfs instance
     this._ipfs = new IPFS(this.config.ipfsOptions);
 
@@ -45,6 +51,7 @@ module.exports = class Decentralizer {
           await this._logDb.load();
 
           // resolve the initialize promise
+          this.isInitialized = true;
           res(true);
         } catch (err) {
           // if any of the above fails, reject the promise
@@ -81,20 +88,30 @@ module.exports = class Decentralizer {
   }
 
   // method to add logs
-  async addLog(id, hash, meta = {}) {
-    if (!id || !hash) {
+  async addLog(data = {}) {
+    if (!data || !Object.keys(data).length) {
       // make sure we have something to log
       return false;
     }
 
     // wait for the log to be added
-    await this._logDb.add({ id, hash, meta });
-    return true;
+    return this._logDb.add({ ...data, _timestamp: Date.now() });
   }
 
   // method to retrieve logs
   async retrieveLogs(opts = {}) {
-    const logs = this._logDb.iterator(opts).collect();
-    return logs.map(l => l.payload.value);
+    const logs = this._logDb.iterator({ limit: -1, ...opts }).collect();
+
+    const parsedLogs = logs.map(l => l.payload.value);
+    parsedLogs.sort((a, b) => {
+      const v1 = a._timestamp;
+      const v2 = b._timestamp;
+
+      if (v1 > v2) return 1;
+      if (v2 > v1) return -1;
+      return 0;
+    }, []);
+
+    return parsedLogs;
   }
 };

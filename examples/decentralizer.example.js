@@ -1,9 +1,9 @@
-const { Decentralizer } = require("../src");
+const Protocol = require("../src");
 
 const run = async () => {
   try {
     // initialize
-    const d = new Decentralizer();
+    const d = new Protocol()._decentralizer;
     await d.initialize();
 
     // add data

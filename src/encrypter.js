@@ -7,11 +7,17 @@ module.exports = class Encrypter {
     this.config = {
       ...config,
     };
+
+    this.isInitialized = false;
   }
 
   // placeholder method for now
-  // eslint-disable-next-line class-methods-use-this
   async initialize() {
+    if (this.isInitialized) {
+      return true;
+    }
+
+    this.isInitialized = true;
     return true;
   }
 
