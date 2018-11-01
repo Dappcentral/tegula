@@ -1,9 +1,9 @@
-const { Identifier } = require("../src");
+const Protocol = require("../src");
 
 const run = async () => {
   try {
     // initialize
-    const i = new Identifier();
+    const i = new Protocol()._identifer;
     await i.initialize();
 
     // normalize address
