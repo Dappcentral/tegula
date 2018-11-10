@@ -61,6 +61,16 @@ module.exports = class Decentralizer {
     });
   }
 
+  async disconnect() {
+    try {
+      await this._orbitDb.disconnect();
+      await this._ipfs.shutdown();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   // method to store data via ipfs
   async addData(data) {
     if (!data || typeof data !== "string") {

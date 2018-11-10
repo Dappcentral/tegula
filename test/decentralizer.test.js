@@ -7,6 +7,10 @@ describe("Decentralizer", () => {
     },
   });
 
+  after(async () => {
+    await d.disconnect();
+  });
+
   it("accepts a configuration", () => {
     const ne = new Decentralizer({ configTest: true });
     assert.equal(ne.config.configTest, true);
