@@ -89,7 +89,7 @@ module.exports = class Decentralizer {
 
   // method to add logs
   async addLog(data = {}) {
-    if (!data || !Object.keys(data).length) {
+    if (!data || typeof data !== "object" || !Object.keys(data).length) {
       // make sure we have something to log
       return false;
     }
