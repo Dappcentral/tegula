@@ -28,6 +28,10 @@ module.exports = class Protocol {
     await this._listingController.initialize();
   }
 
+  async disconnect() {
+    await this._decentralizer.disconnect();
+  }
+
   // setter methods
   async setUserAddress(userAddress) {
     this._userAddress = userAddress;
