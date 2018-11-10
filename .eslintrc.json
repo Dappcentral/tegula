@@ -10,12 +10,9 @@
   },
   "globals": {
     "after": true,
-    "apiSender": true,
     "assert": true,
     "before": true,
     "describe": true,
-    "fabricator": true,
-    "request": true,
     "it": true
   }
 }
