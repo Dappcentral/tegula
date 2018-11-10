@@ -25,9 +25,9 @@ jobs:
       - run:
           name: Lint
           command: npm run lint
-      # - run:
-      #     name: Run tests
-      #     command: npm test
+      - run:
+          name: Run tests
+          command: npm test
       - run:
           name: Build
           command: npm run build
@@ -56,10 +56,7 @@ workflows:
   version: 2
   build-test-deploy:
     jobs:
-      - build_and_test:
-          filters:
-            tags:
-              only: /^v.*/
+      - build_and_test
       - deploy:
           requires:
             - build_and_test
