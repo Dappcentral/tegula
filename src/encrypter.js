@@ -44,11 +44,12 @@ module.exports = class Encrypter {
       return null;
     }
 
-    // parse to bytes and the as a string
-    const bytes = CryptoJS.AES.decrypt(encryptedData, ek);
-    const decrypted = bytes.toString(CryptoJS.enc.Utf8);
-
+    let decrypted = "";
     try {
+      // parse to bytes and the as a string
+      const bytes = CryptoJS.AES.decrypt(encryptedData, ek);
+      decrypted = bytes.toString(CryptoJS.enc.Utf8);
+
       // try using JSON.parse (assuming we had used the encrypt method above)
       return JSON.parse(decrypted);
     } catch (e) {
