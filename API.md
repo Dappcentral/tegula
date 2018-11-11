@@ -231,3 +231,131 @@ Combines `parseAddressToCoordinates` and `parseCoordinatesToUPI` from above. Ret
 ```js
 const upi = await parseAddressToUPI("123 apple street");
 ```
+
+---
+
+## ListingController
+
+Exposed via `protocol._listingController`.
+
+#### async initialize()
+
+Returns a `Promise.all()` wrapper around initializing each of the three core classes; Decentralizer, Encrypter, and Identifier.
+
+```js
+await protocol._listingController.initialize();
+```
+
+#### async normalizeData(data)
+
+Returns a "normalized" form of given listing data.
+
+```js
+const listingData = { address: "123 apple street" };
+const normalized = await protocol._listingController.normalizeData(listingData);
+```
+
+#### async validateUserAddress(userAddress)
+
+Returns a truthy value based on whether or not the given `userAddress` parameter is a valid Ethereum address.
+
+```js
+const isValid = await protocol._listingController.validateUserAddress(
+  "some address",
+);
+```
+
+#### async addData(data, userAddress, ek)
+
+Accepts data, a user address, and an encryption key as required parameters and throws an error if any are missing. The method first normalizes the data, computes the UPI, encrypts it, sends it to IPFS, and finally adds it as a log event via OrbitDB. Will throw appropriate errors if any of those steps fail, otherwise will return `true`.
+
+```js
+const listingData = { address: "123 apple street" };
+await protocl._listingController.addData(
+  listingData,
+  "some address",
+  "some key",
+);
+```
+
+#### async getLogsByAddress(userAddress)
+
+Returns all the OrbitDB event logs matching the given `userAddress` parameter. If the given `userAddress` is not a valid address then the method immediately returns `[]`.
+
+```js
+const logs = await protocol._listingController.getLogsByAddress(
+  "some user address",
+);
+```
+
+---
+
+## Protocol
+
+Exposed directly via `protocol`.
+
+#### async initialize()
+
+Calls the `initialize()` methods for each of it's `this._decentralizer`, `this._encrypter`, `this._identifer`, and `this._listingController` sub-classes.
+
+```js
+await protocol.initialize();
+```
+
+#### async disconnect()
+
+A root-level shortcut to `protocol._decentralizer.disconnect()`.
+
+```js
+await protocol.disconnect();
+```
+
+#### async setUserAddress(userAddress)
+
+Sets the protocol's current `_userAddress` value allowing other methods to be used without explicitly passing one in.
+
+```js
+await protocol.setUserAddress("some user address");
+```
+
+#### async setEncryptionKey(ek)
+
+Sets the protocol's current `_encryptionKey` value allowing other methods to be used without explicitly passing one in.
+
+```js
+await protocol.setEncryptionKey("some key");
+```
+
+#### async addListing(data)
+
+A root-level abstraction around `protocol._listingController.addData`. Returns `true` upon success, otherwise returns the corresponding error.
+
+```js
+const listingData = { address: "123 apple street" };
+await protocol.addListing(listingData);
+```
+
+#### async getLogsByAddress(userAddress)
+
+Accepts an optional `userAddress` parameter. Returns the logs for a user address directly from `protocol._listingController.getLogsByAddress`.
+
+```js
+const logs = await protocol.getLogsByAddress("some user address");
+```
+
+#### async batchAddListings(listings = [])
+
+A `Promise.all` wrapper around a list of listing data, mapped to `protocol.addListing`;
+
+```js
+const listings = [{ address: "some address 1" }, { address: "some address 2" }];
+await protocol.batchAddListings(listings);
+```
+
+#### async getListings(ek, userAddress)
+
+Returns listings provided an optional encryption key (`ek`) and optional `userAddress`. It first looks up all the logs, pulls out the most recent IPFS hashes per UPI, grabs the related content from IPFS, and then decrypts it all.
+
+```js
+const listings = await protocol.getListings();
+```
