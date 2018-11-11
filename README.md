@@ -34,6 +34,9 @@ const protocol = new Protocol();
 protocol.initialize().then(() => {
   // now you're good to go!
 });
+
+// OR if you're inside an async method already
+await protocol.initialize();
 ```
 
 #### Set Address and Encryption Keys
@@ -74,6 +77,8 @@ protocol.initialize().then(async () => {
 });
 ```
 
+For a more complete list of available methods, visit [API.md](API.md)
+
 ---
 
 ## Dependencies
@@ -103,38 +108,39 @@ This project is split into a few main directories:
 4. `test/` - unit tests for everything in `src`
 
 ```
-|-- .cicleci/
-|---- config.yml
-|-- dist/
-|-- examples/
-|---- decentralizer.example.js
-|---- encrypter.example.js
-|---- identifier.example.js
-|---- protocol.example.js
-|-- node_modules/
-|-- src/
-|---- decentralizer.js
-|---- encrypter.js
-|---- identifier.js
-|---- index.js
-|---- listing-controller.js
-|---- protocol.js
-|-- test/
-|---- _setup.js
-|---- decentralizer.test.js
-|---- encrypter.test.js
-|---- identifier.test.js
-|---- listing-controller.test.js
-|---- protocol.test.js
-|-- .eslintignore
-|-- .eslintrc.json
-|-- .npmignore
-|-- .prettierrc
-|-- guplfile.js
-|-- LICENSE
-|-- package-lock.json
-|-- package.json
-|-- README.md
+├── .cicleci/
+├──── config.yml
+├── dist/
+├── examples/
+├──── decentralizer.example.js
+├──── encrypter.example.js
+├──── identifier.example.js
+├──── protocol.example.js
+├── node_modules/
+├── src/
+├──── decentralizer.js
+├──── encrypter.js
+├──── identifier.js
+├──── index.js
+├──── listing-controller.js
+├──── protocol.js
+├── test/
+├──── _setup.js
+├──── decentralizer.test.js
+├──── encrypter.test.js
+├──── identifier.test.js
+├──── listing-controller.test.js
+├──── protocol.test.js
+├── .eslintignore
+├── .eslintrc.json
+├── .npmignore
+├── .prettierrc
+├── API.md
+├── guplfile.js
+├── LICENSE
+├── package-lock.json
+├── package.json
+├── README.md
 ```
 
 ---
