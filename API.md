@@ -34,8 +34,8 @@ Default and available options:
 ```js
 {
   ipfsOptions: {
-    // all configuration options for IPFS are available here
-    // TODO: link
+    // all configuration options for IPFS are available here:
+    // https://github.com/ipfs/js-ipfs#ipfs-constructor
     EXPIREMENTAL: {
       // this is required for OrbitDB to work
       pubsub: true
@@ -92,7 +92,7 @@ const logHash = await protocol._decentralizer.addLog({ a: "b" });
 
 #### async retrieveLogs(opts = {})
 
-Returns all the OrbitDB event logs, sorted by `_timestamp`, and matching any provided `opts`. The available opts are defined [here](TODO).
+Returns all the OrbitDB event logs, sorted by `_timestamp`, and matching any provided `opts`. The available opts are defined [here](https://github.com/orbitdb/orbit-db/blob/master/API.md#iteratoroptions).
 
 ```js
 const logs = await retrieveLogs();

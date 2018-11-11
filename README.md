@@ -83,18 +83,18 @@ For a more complete list of available methods, visit [API.md](API.md)
 
 ## Dependencies
 
-- [Crypto-JS]() - node `crypto` library universally available and used here for encryption
+- [Crypto-JS](https://www.npmjs.com/package/crypto-js) - node `crypto` library universally available and used here for encryption
 - [IPFS](https://ipfs.io) - decentralized file storage
-- [OrbitDB]() - database methods atop IPFS
-- [Web3]() - Ethereum wrapper used here for address validation and sha3 hashing
+- [OrbitDB](https://github.com/orbitdb/orbit-db) - database methods atop IPFS
+- [Web3](https://github.com/ethereum/web3.js/) - Ethereum wrapper used here for address validation and sha3 hashing
 
 ## DevDependencies
 
-- [Babel]() - ES2015 transpiling
-- [Eslint]() - linting
-- [Gulp]() - build tools for packaging
-- [Mocha]() - unit testing
-- [Prettier]() - opinionated code formatting
+- [Babel](https://babeljs.io/) - ES2015 transpiling
+- [Eslint](https://eslint.org/) - linting
+- [Gulp](https://gulpjs.com/) - build tools for packaging
+- [Mocha](https://mochajs.org/) - unit testing
+- [Prettier](https://prettier.io/) - opinionated code formatting
 
 ---
 
