@@ -214,7 +214,15 @@ const normalizedAddress = await protocol._identifier.normalizeAddress(
 
 #### async parseAddressToCoordinates(address)
 
-Returns an object with keys including `lat`, `lng`, and `unitId`. If no address is provided simply `{}` is returned.
+Returns an object with keys including `lat`, `lng`, and `unitId` leveraging the Google Maps API. If no address is provided simply `{}` is returned.
+
+NOTE: in order to use this method you must pass in a valid API key such as:
+
+```js
+const protocol = new Protocol({
+  identifier: { googleMapsApiKey: "API-KEY-HERE" },
+});
+```
 
 ```js
 const {
