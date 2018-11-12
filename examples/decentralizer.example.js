@@ -17,11 +17,11 @@ const run = async () => {
     console.log(JSON.parse(data));
 
     // add log
-    await d.addLog("some-id", hash, { metaKey: "meta-value" });
+    await d.addLog({ id: "some-id", hash, metaKey: "meta-value" });
 
     // retrieve logs
-    const [log] = await d.retrieveLogs({ limit: 1 });
-    console.log(log);
+    const logs = await d.retrieveLogs({ limit: 1 });
+    console.log(logs.pop());
   } catch (err) {
     console.log(err);
   }

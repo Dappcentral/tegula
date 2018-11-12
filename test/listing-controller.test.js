@@ -70,9 +70,14 @@ describe("ListingController", () => {
 
   describe("#validateUserAddress", () => {
     it("validates a given user address as an Ethereum address", async () => {
-      assert.equal(!!(await lc.validateUserAddress()), false);
-      assert.equal(!!(await lc.validateUserAddress("")), false);
-      assert.equal(!!(await lc.validateUserAddress("testing")), true);
+      assert.equal(await lc.validateUserAddress(), false);
+      assert.equal(await lc.validateUserAddress(""), false);
+      assert.equal(
+        await lc.validateUserAddress(
+          "0x50f8c9413b2e4ac646f087fa9db9a2d6d0fd242e",
+        ),
+        true,
+      );
     });
   });
 

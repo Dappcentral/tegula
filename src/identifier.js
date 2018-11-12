@@ -129,17 +129,52 @@ module.exports = class Identifier {
   }
 
   // placeholder method for utlizing a geolocation API
-  // eslint-disable-next-line class-methods-use-this
   async parseAddressToCoordinates(address) {
-    if (!address) {
+    if (!address || !this.config.googleMapsApiKey || !module) {
+      // make sure we have an address and a google maps config
+      // also the @google/maps package requires running in node
+      //    sooo this won't work in a browser
+      //    https://github.com/googlemaps/google-maps-services-js#attention
       return {};
     }
 
-    return {
-      lat: (Math.random() * 360 - 180).toFixed(7) * 1,
-      lng: (Math.random() * 360 - 180).toFixed(7) * 1,
-      unitId: null,
-    };
+    if (!this._googleMapsClient) {
+      // eslint-disable-next-line global-require
+      this._googleMapsClient = require("@google/maps").createClient({
+        key: this.config.googleMapsApiKey,
+        Promise,
+      });
+    }
+
+    const payload = {};
+
+    const { json } = await this._googleMapsClient
+      .geocode({ address })
+      .asPromise();
+
+    if (json.results && json.results[0]) {
+      // make sure we have a valid result from Google
+      const [place] = json.results;
+
+      // pull out the lat and lng
+      if (place.geometry && place.geometry.location) {
+        payload.lat = place.geometry.location.lat;
+        payload.lng = place.geometry.location.lng;
+      }
+
+      // figure out the unit
+      if (place.address_components instanceof Array) {
+        const subpremise = place.address_components.find(
+          ac =>
+            ac && ac.types instanceof Array && ac.types.includes("subpremise"),
+        );
+        if (subpremise) {
+          payload.unit = subpremise.short_name;
+        }
+      }
+    }
+
+    return payload;
   }
 
   // putting it altogether as a helper method
