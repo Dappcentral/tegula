@@ -1,3 +1,5 @@
+const web3 = require("web3");
+
 module.exports = class ListingController {
   constructor({ decentralizer, encrypter, identifier }) {
     this._decentralizer = decentralizer;
@@ -38,10 +40,9 @@ module.exports = class ListingController {
   }
 
   // method to validate userAddress
-  // TODO: placeholder method for now
   // eslint-disable-next-line class-methods-use-this
   async validateUserAddress(userAddress) {
-    return userAddress && userAddress.length;
+    return web3.utils.isAddress(userAddress);
   }
 
   // method to distribute data
