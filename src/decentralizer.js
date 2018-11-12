@@ -1,4 +1,5 @@
 const IPFS = require("ipfs");
+const IpfsApi = require("ipfs-api");
 const OrbitDb = require("orbit-db");
 
 module.exports = class Decentralizer {
@@ -29,36 +30,36 @@ module.exports = class Decentralizer {
       return true;
     }
 
-    // create the ipfs instance
-    this._ipfs = new IPFS(this.config.ipfsOptions);
+    try {
+      // create the ipfs instance
+      if (this.config.ipfsOptions.apiUri) {
+        this._ipfs = IpfsApi(this.config.ipfsOptions.apiUri);
+      } else {
+        this._ipfs = new IPFS(this.config.ipfsOptions);
+        await new Promise((res, rej) => {
+          this._ipfs.on("error", rej);
+          this._ipfs.on("ready", res);
+        });
+      }
 
-    return new Promise((res, rej) => {
-      // reject on errors
-      this._ipfs.on("error", rej);
+      // create the orbitDb instance
+      this._orbitDb = new OrbitDb(this._ipfs);
 
-      // setup OrbitDb after IPFS
-      this._ipfs.on("ready", async () => {
-        try {
-          // create the orbitDb instance
-          this._orbitDb = new OrbitDb(this._ipfs);
+      // define the specific logDb
+      this._logDb = await this._orbitDb.log(
+        this.config.orbitDbOptions.LOG_DATABASE,
+      );
 
-          // define the specific logDb
-          this._logDb = await this._orbitDb.log(
-            this.config.orbitDbOptions.LOG_DATABASE,
-          );
+      // load the logDb so we have it
+      await this._logDb.load();
 
-          // load the logDb so we have it
-          await this._logDb.load();
-
-          // resolve the initialize promise
-          this.isInitialized = true;
-          res(true);
-        } catch (err) {
-          // if any of the above fails, reject the promise
-          rej(err);
-        }
-      });
-    });
+      // resolve the initialize promise
+      this.isInitialized = true;
+      return true;
+    } catch (err) {
+      // if any of the above fails, reject the promise
+      return err;
+    }
   }
 
   async disconnect() {
