@@ -7,7 +7,7 @@
     "build": "gulp",
     "lint": "eslint . --fix",
     "prepublish": "npm run build",
-    "test": "npm test"
+    "test": "mocha --require test/_setup.js test/*.test.js --exit"
   },
   "repository": {
     "type": "git",
@@ -37,11 +37,12 @@
     "gulp-replace": "^1.0.0",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.1",
+    "mocha": "^5.2.0",
     "prettier": "^1.14.3"
   },
   "dependencies": {
     "crypto-js": "^3.1.9-1",
-    "ipfs": "^0.32.3",
+    "ipfs": "^0.33.1",
     "orbit-db": "^0.19.9",
     "web3": "^1.0.0-beta.36"
   }

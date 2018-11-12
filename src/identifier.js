@@ -120,7 +120,7 @@ module.exports = class Identifier {
     let clean = (address || "").toLowerCase();
     Object.entries(knownAbbrs).forEach(([k, v]) => {
       // replace all the known abbreviations
-      clean = clean.replace(new RegExp(` ${k} `, "g"), ` ${v} `);
+      clean = clean.replace(new RegExp(` ${k}( ?)`, "g"), ` ${v}$1`);
     });
 
     // strip out any non-alphanumeric/space characters
