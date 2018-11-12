@@ -256,7 +256,7 @@ await protocol._listingController.initialize();
 
 #### async normalizeData(data)
 
-Returns a "normalized" form of given listing data.
+Returns a "normalized" form of given listing data. This will include things like camelCasing keys and cleaning up price formats.
 
 ```js
 const listingData = { address: "123 apple street" };

@@ -1,5 +1,8 @@
 const web3 = require("web3");
 
+const toCamelCase = (str = "") =>
+  str.replace(/[-_]([a-z])/g, g => g[1].toUpperCase());
+
 module.exports = class ListingController {
   constructor({ decentralizer, encrypter, identifier }) {
     this._decentralizer = decentralizer;
@@ -26,15 +29,39 @@ module.exports = class ListingController {
   }
 
   // method to normalize listing data based on known standards
-  // TODO: placeholder method for now
+  // this is mostly a placeholder for now,
+  // but can be flushed out further as we go
   // eslint-disable-next-line class-methods-use-this
   async normalizeData(data) {
     const newData = {};
 
     Object.entries(data || {}).forEach(([k, v]) => {
-      // TODO: do something here
-      newData[k] = v;
+      if (v || [0, false].includes(v)) {
+        newData[toCamelCase(k)] = v;
+      }
     });
+
+    if (!newData.fullAddress) {
+      // make sure we have a fullAddress if possible
+      newData.fullAddress = [
+        newData.address,
+        newData.city,
+        newData.region,
+        newData.zipcode,
+        newData.country,
+      ]
+        .filter(v => v && v.length)
+        .join(" ");
+
+      if (!newData.fullAddress) {
+        delete newData.fullAddress;
+      }
+    }
+
+    if (newData.price) {
+      // clean up the price
+      newData.price = `${newData.price}`.replace(/\$/g, "");
+    }
 
     return newData;
   }
