@@ -34,8 +34,8 @@ Default and available options:
 ```js
 {
   ipfsOptions: {
-    // all configuration options for IPFS are available here
-    // TODO: link
+    // all configuration options for IPFS are available here:
+    // https://github.com/ipfs/js-ipfs#ipfs-constructor
     EXPIREMENTAL: {
       // this is required for OrbitDB to work
       pubsub: true
@@ -92,7 +92,7 @@ const logHash = await protocol._decentralizer.addLog({ a: "b" });
 
 #### async retrieveLogs(opts = {})
 
-Returns all the OrbitDB event logs, sorted by `_timestamp`, and matching any provided `opts`. The available opts are defined [here](TODO).
+Returns all the OrbitDB event logs, sorted by `_timestamp`, and matching any provided `opts`. The available opts are defined [here](https://github.com/orbitdb/orbit-db/blob/master/API.md#iteratoroptions).
 
 ```js
 const logs = await retrieveLogs();
@@ -214,7 +214,15 @@ const normalizedAddress = await protocol._identifier.normalizeAddress(
 
 #### async parseAddressToCoordinates(address)
 
-Returns an object with keys including `lat`, `lng`, and `unitId`. If no address is provided simply `{}` is returned.
+Returns an object with keys including `lat`, `lng`, and `unitId` leveraging the Google Maps API. If no address is provided simply `{}` is returned.
+
+NOTE: in order to use this method you must pass in a valid API key such as:
+
+```js
+const protocol = new Protocol({
+  identifier: { googleMapsApiKey: "API-KEY-HERE" },
+});
+```
 
 ```js
 const {
