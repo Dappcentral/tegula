@@ -34,6 +34,38 @@ describe("ListingController", () => {
       const data = { a: "b" };
       assert.deepStrictEqual(await lc.normalizeData(data), data);
     });
+
+    it("filters empty values", async () => {
+      const data = { a: "b", c: null, d: false };
+      assert.deepStrictEqual(await lc.normalizeData(data), {
+        a: "b",
+        d: false,
+      });
+    });
+
+    it("camelCases keys", async () => {
+      const data = { under_scored: 1, camelCased: 2, "dash-ed": 3 };
+      assert.deepStrictEqual(await lc.normalizeData(data), {
+        underScored: 1,
+        camelCased: 2,
+        dashEd: 3,
+      });
+    });
+
+    it("adds a fullAddress key when possible", async () => {
+      const data = { address: "123 apple" };
+      assert.deepStrictEqual(await lc.normalizeData(data), {
+        address: data.address,
+        fullAddress: data.address,
+      });
+    });
+
+    it("cleans up price values", async () => {
+      const data = { price: "$123" };
+      assert.deepStrictEqual(await lc.normalizeData(data), {
+        price: "123",
+      });
+    });
   });
 
   describe("#validateUserAddress", () => {
