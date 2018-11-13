@@ -23,7 +23,6 @@
     "@babel/core": "^7.1.2",
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
-    "@babel/runtime": "^7.1.2",
     "del": "^3.0.0",
     "eslint": "^5.7.0",
     "eslint-config-airbnb-base": "^13.1.0",
@@ -41,6 +40,7 @@
     "prettier": "^1.14.3"
   },
   "dependencies": {
+    "@babel/runtime": "^7.1.2",
     "@google/maps": "^0.5.5",
     "crypto-js": "^3.1.9-1",
     "ipfs": "^0.33.1",
