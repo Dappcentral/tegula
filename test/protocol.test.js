@@ -42,6 +42,16 @@ describe("Protocol", () => {
     });
   });
 
+  describe("#parseUPI", () => {
+    it("calls the _listingController.parseUPI method", async () => {
+      assert.equal(await p.parseUPI(), null);
+      assert.notEqual(
+        await p.parseUPI({ latitude: 123.456789, longitude: 123.456789 }),
+        null,
+      );
+    });
+  });
+
   describe("#addListing", () => {
     // NOTE: we already set the userAddress and encryptionKey above
     it("returns an error on failure", async () => {

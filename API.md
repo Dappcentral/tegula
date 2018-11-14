@@ -281,6 +281,17 @@ const isValid = await protocol._listingController.validateUserAddress(
 );
 ```
 
+#### async parseUPI(data)
+
+Method to parse the UPI from a given set of data. First looks at `latitude` and `longitude` values, otherwise tries looking them up based on the address provided (only available if Google Maps is also initialized via the configuration option above).
+
+```js
+const UPI = await protocol._listingController.parseUPI({
+  latitude: 123.456789,
+  longitude: 123.456789,
+});
+```
+
 #### async addData(data, userAddress, ek)
 
 Accepts data, a user address, and an encryption key as required parameters and throws an error if any are missing. The method first normalizes the data, computes the UPI, encrypts it, sends it to IPFS, and finally adds it as a log event via OrbitDB. Will throw appropriate errors if any of those steps fail, otherwise will return `true`.
@@ -342,9 +353,20 @@ Sets the protocol's current `_encryptionKey` value allowing other methods to be 
 await protocol.setEncryptionKey("some key");
 ```
 
-#### async addListing(data)
+#### async parseUPI(data)
 
-A root-level abstraction around `protocol._listingController.addData`. Returns `true` upon success, otherwise returns the corresponding error.
+Method to parse the UPI from a given set of data. First looks at `latitude` and `longitude` values, otherwise tries looking them up based on the address provided (only available if Google Maps is also initialized via the configuration option above). This directly calls the ListingController#parseUPI method listed above.
+
+```js
+const UPI = await protocol.parseUPI({
+  latitude: 123.456789,
+  longitude: 123.456789,
+});
+```
+
+#### async addListing(data, userAddress, ek)
+
+A root-level abstraction around `protocol._listingController.addData`. Returns `true` upon success, otherwise returns the corresponding error. Accepts optional user address and encryption key parameters, otherwise defaults to previously set values.
 
 ```js
 const listingData = { address: "123 apple street" };

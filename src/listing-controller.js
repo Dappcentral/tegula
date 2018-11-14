@@ -85,14 +85,13 @@ module.exports = class ListingController {
     return web3.utils.isAddress(userAddress);
   }
 
-  // method to distribute data
-  async addData(data, userAddress, ek) {
-    if (!data || !userAddress || !ek) {
-      // make sure we have valid params
-      throw new Error("invalid params");
+  // method to compute the UPI of given data
+  async parseUPI(data) {
+    if (!data || typeof data !== "object") {
+      return null;
     }
 
-    // normalize the data
+    // normalize the data first to be safe
     const normalized = await this.normalizeData(data);
 
     // figure out the UPI by coordinates
@@ -106,6 +105,21 @@ module.exports = class ListingController {
       UPI = await this._identifier.parseAddressToUPI(data.fullAddress);
     }
 
+    return UPI;
+  }
+
+  // method to distribute data
+  async addData(data, userAddress, ek) {
+    if (!data || !userAddress || !ek) {
+      // make sure we have valid params
+      throw new Error("invalid params");
+    }
+
+    // normalize the data
+    const normalized = await this.normalizeData(data);
+
+    // parse the UPI
+    const UPI = await this.parseUPI(normalized);
     if (!UPI) {
       // if we failed to find a UPI, say so
       throw new Error("cannot find valid UPI");
