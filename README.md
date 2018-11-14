@@ -58,7 +58,7 @@ protocol.initialize().then(async () => {
 protocol.initialize().then(async () => {
   // ...
 
-  const listingData = { lat: 123.456789, lng: 123.456789, ... };
+  const listingData = { latitude: 123.456789, longitude: 123.456789, ... };
   await protocol.addListing(listingData);
 });
 ```

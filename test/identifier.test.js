@@ -27,7 +27,7 @@ describe("Identifier", () => {
       );
     });
 
-    it("accepts an optional unitId", async () => {
+    it("accepts an optional unit", async () => {
       const upi1 = await i.parseCoordinatesToUPI(123.456789, 123.456789);
       const upi2 = await i.parseCoordinatesToUPI(
         123.456789,

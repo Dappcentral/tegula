@@ -13,11 +13,15 @@ const run = async () => {
     console.log(normalized);
 
     // get coordinates
-    const { lat, lng, unitId } = await i.parseAddressToCoordinates(normalized);
-    console.log(lat, lng, unitId);
+    const {
+      latitude,
+      longitude,
+      unitNumber,
+    } = await i.parseAddressToCoordinates(normalized);
+    console.log(latitude, longitude, unitNumber);
 
     // get UPI hash
-    const hash = await i.parseCoordinatesToUPI(lat, lng, unitId);
+    const hash = await i.parseCoordinatesToUPI(latitude, longitude, unitNumber);
     console.log(hash);
 
     // all together now
