@@ -364,9 +364,9 @@ const UPI = await protocol.parseUPI({
 });
 ```
 
-#### async addListing(data)
+#### async addListing(data, userAddress, ek)
 
-A root-level abstraction around `protocol._listingController.addData`. Returns `true` upon success, otherwise returns the corresponding error.
+A root-level abstraction around `protocol._listingController.addData`. Returns `true` upon success, otherwise returns the corresponding error. Accepts optional user address and encryption key parameters, otherwise defaults to previously set values.
 
 ```js
 const listingData = { address: "123 apple street" };
