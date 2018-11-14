@@ -50,7 +50,7 @@ describe("Protocol", () => {
 
     it("returns true on success", async () => {
       assert.equal(
-        await p.addListing({ lat: 123.456789, lng: 123.456789 }),
+        await p.addListing({ latitude: 123.456789, longitude: 123.456789 }),
         true,
       );
     });
@@ -69,7 +69,7 @@ describe("Protocol", () => {
     it("can add multiple listings at once", async () => {
       const results = await p.batchAddListings([
         {},
-        { lat: 123.456789, lng: 123.456789, unitId: "abc" },
+        { latitude: 123.456789, longitude: 123.456789, unitNumber: "abc" },
       ]);
       assert.notEqual(results[0], true);
       assert.equal(results[1], true);
@@ -85,13 +85,13 @@ describe("Protocol", () => {
       assert.equal(listings.length, 2);
       assert.deepStrictEqual(listings, [
         {
-          lat: 123.456789,
-          lng: 123.456789,
+          latitude: 123.456789,
+          longitude: 123.456789,
         },
         {
-          lat: 123.456789,
-          lng: 123.456789,
-          unitId: "abc",
+          latitude: 123.456789,
+          longitude: 123.456789,
+          unitNumber: "abc",
         },
       ]);
     });

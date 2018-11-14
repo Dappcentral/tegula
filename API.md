@@ -189,9 +189,9 @@ This is a placeholder method for now that returns `true` and sets `protocol._ide
 await protocol._identifier.initialize();
 ```
 
-#### async parseCoordinatesToUPI(lat, lng, unitId = "")
+#### async parseCoordinatesToUPI(lat, lng, unit = "")
 
-Returns a UPI (Universal Property Identifier) as the sha3 hash of the concatenation of given latitude, longitude, and optional unit ID parameters. Latitude and longitude must be numerical values with at least 6 decimal places of precision, otherwise the method will return `null`.
+Returns a UPI (Universal Property Identifier) as the sha3 hash of the concatenation of given latitude, longitude, and optional unit parameters. Latitude and longitude must be numerical values with at least 6 decimal places of precision, otherwise the method will return `null`.
 
 ```js
 const upi = await protocol._identifier.parseCoordinatesToUPI(
@@ -214,7 +214,7 @@ const normalizedAddress = await protocol._identifier.normalizeAddress(
 
 #### async parseAddressToCoordinates(address)
 
-Returns an object with keys including `lat`, `lng`, and `unitId` leveraging the Google Maps API. If no address is provided simply `{}` is returned.
+Returns an object with keys including `latitude`, `longitude`, and `unitNumber` leveraging the Google Maps API. If no address is provided simply `{}` is returned.
 
 NOTE: in order to use this method you must pass in a valid API key such as:
 
@@ -226,9 +226,9 @@ const protocol = new Protocol({
 
 ```js
 const {
-  lat,
-  lng,
-  unitId,
+  latitude,
+  longitude,
+  unitNumber,
 } = await protocol._identifier.parseAddressToCoordinates("123 apple street");
 ```
 
@@ -252,6 +252,14 @@ Returns a `Promise.all()` wrapper around initializing each of the three core cla
 
 ```js
 await protocol._listingController.initialize();
+```
+
+#### async getListingFields()
+
+A quick method to return an array of the valid listing field keys. Used in ListingController#normalizeData below.
+
+```js
+const validKeys = await protocol._listingController.getListingFields();
 ```
 
 #### async normalizeData(data)

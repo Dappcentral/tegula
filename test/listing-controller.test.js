@@ -31,24 +31,34 @@ describe("ListingController", () => {
 
   describe("#normalizeData", () => {
     it("returns what it's given", async () => {
-      const data = { a: "b" };
+      const data = { buildType: "b" };
       assert.deepStrictEqual(await lc.normalizeData(data), data);
     });
 
-    it("filters empty values", async () => {
-      const data = { a: "b", c: null, d: false };
+    it("filters by available listing fields", async () => {
+      const data = {
+        buildType: "house",
+        anotherAddressField: "another address",
+      };
       assert.deepStrictEqual(await lc.normalizeData(data), {
-        a: "b",
-        d: false,
+        buildType: "house",
+      });
+    });
+
+    it("filters empty values", async () => {
+      const data = { buildType: "b", country: null, builder: false };
+      assert.deepStrictEqual(await lc.normalizeData(data), {
+        buildType: "b",
+        builder: false,
       });
     });
 
     it("camelCases keys", async () => {
-      const data = { under_scored: 1, camelCased: 2, "dash-ed": 3 };
+      const data = { access_code: 1, bathroomsFull: 2, "bathrooms-total": 3 };
       assert.deepStrictEqual(await lc.normalizeData(data), {
-        underScored: 1,
-        camelCased: 2,
-        dashEd: 3,
+        accessCode: 1,
+        bathroomsFull: 2,
+        bathroomsTotal: 3,
       });
     });
 
@@ -87,7 +97,7 @@ describe("ListingController", () => {
       assert.equal(
         await lc
           .addData(
-            { lat: 123.456789, lng: 123.456789 },
+            { latitude: 123.456789, longitude: 123.456789 },
             userAddress,
             "some key",
           )
@@ -104,7 +114,7 @@ describe("ListingController", () => {
       assert.equal(
         await lc
           .addData(
-            { lat: 123.456789, lng: 123.456789 },
+            { latitude: 123.456789, longitude: 123.456789 },
             userAddress,
             "some key",
           )
@@ -116,7 +126,7 @@ describe("ListingController", () => {
     it("returns true on success", async () => {
       assert.equal(
         await lc.addData(
-          { lat: 123.456789, lng: 123.456789 },
+          { latitude: 123.456789, longitude: 123.456789 },
           userAddress,
           "some key",
         ),

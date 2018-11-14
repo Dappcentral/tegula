@@ -20,9 +20,9 @@ module.exports = class Identifier {
     return true;
   }
 
-  // method to convert lat, lng, unitId to UPI hash
+  // method to convert lat, lng, unit to UPI hash
   // eslint-disable-next-line class-methods-use-this
-  async parseCoordinatesToUPI(lat, lng, unitId = "") {
+  async parseCoordinatesToUPI(lat, lng, unit = "") {
     if (!lat || !lng || typeof lat !== "number" || typeof lng !== "number") {
       // make sure we have valid inputs here
       return null;
@@ -31,7 +31,7 @@ module.exports = class Identifier {
     // make sure coordinates include signs
     const parsedLat = lat < 0 ? lat.toString() : `+${lat.toString()}`;
     const parsedLng = lng < 0 ? lng.toString() : `+${lng}`;
-    const parsedUnitId = `${unitId || ""}`.trim().toUpperCase();
+    const parsedUnit = `${unit || ""}`.trim().toUpperCase();
 
     if (
       !parsedLat.includes(".") ||
@@ -44,7 +44,7 @@ module.exports = class Identifier {
     }
 
     // create UPI by joining the parts
-    const UPI = [parsedLat, parsedLng, parsedUnitId].join("||");
+    const UPI = [parsedLat, parsedLng, parsedUnit].join("||");
 
     // return the sha3 hash for consistent lengths
     return web3.utils.sha3(UPI);
@@ -158,8 +158,8 @@ module.exports = class Identifier {
 
       // pull out the lat and lng
       if (place.geometry && place.geometry.location) {
-        payload.lat = place.geometry.location.lat;
-        payload.lng = place.geometry.location.lng;
+        payload.latitude = place.geometry.location.lat;
+        payload.longitude = place.geometry.location.lng;
       }
 
       // figure out the unit
@@ -169,7 +169,7 @@ module.exports = class Identifier {
             ac && ac.types instanceof Array && ac.types.includes("subpremise"),
         );
         if (subpremise) {
-          payload.unit = subpremise.short_name;
+          payload.unitNumber = subpremise.short_name;
         }
       }
     }
@@ -184,10 +184,16 @@ module.exports = class Identifier {
     }
 
     const normalized = await this.normalizeAddress(address);
-    const { lat, lng, unitId } = await this.parseAddressToCoordinates(
-      normalized,
+    const {
+      latitude,
+      longitude,
+      unitNumber,
+    } = await this.parseAddressToCoordinates(normalized);
+    const UPI = await this.parseCoordinatesToUPI(
+      latitude,
+      longitude,
+      unitNumber,
     );
-    const UPI = await this.parseCoordinatesToUPI(lat, lng, unitId);
 
     return UPI;
   }

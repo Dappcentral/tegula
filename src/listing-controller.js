@@ -1,4 +1,5 @@
 const web3 = require("web3");
+const listingFields = require("./assets/listing-fields");
 
 const toCamelCase = (str = "") =>
   str.replace(/[-_]([a-z])/g, g => g[1].toUpperCase());
@@ -28,16 +29,28 @@ module.exports = class ListingController {
     return true;
   }
 
+  // simple method to return the availabe listing field keys
+  // can/should be augmented later with a full schema validation
+  // eslint-disable-next-line class-methods-use-this
+  async getListingFields() {
+    return listingFields.slice();
+  }
+
   // method to normalize listing data based on known standards
   // this is mostly a placeholder for now,
   // but can be flushed out further as we go
-  // eslint-disable-next-line class-methods-use-this
   async normalizeData(data) {
     const newData = {};
 
-    Object.entries(data || {}).forEach(([k, v]) => {
-      if (v || [0, false].includes(v)) {
-        newData[toCamelCase(k)] = v;
+    const validKeys = await this.getListingFields();
+    validKeys.push("fullAddress");
+
+    Object.entries(data || {}).forEach(([ok, v]) => {
+      const k = toCamelCase(ok);
+      if (k.startsWith("_") || validKeys.includes(k)) {
+        if (v || [0, false].includes(v)) {
+          newData[k] = v;
+        }
       }
     });
 
@@ -84,9 +97,9 @@ module.exports = class ListingController {
 
     // figure out the UPI by coordinates
     let UPI = await this._identifier.parseCoordinatesToUPI(
-      normalized.lat,
-      normalized.lng,
-      normalized.unitId,
+      normalized.latitude,
+      normalized.longitude,
+      normalized.unitNumber,
     );
     if (!UPI) {
       // if we can't get an UPI using the coordinates, then try by full address
