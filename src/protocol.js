@@ -41,6 +41,15 @@ module.exports = class Protocol {
     this._encryptionKey = ek;
   }
 
+  // calling ListingController#parseUPI
+  async parseUPI(data) {
+    try {
+      return await this._listingController.parseUPI(data);
+    } catch (e) {
+      return null;
+    }
+  }
+
   // calling the ListingController
   async addListing(data) {
     try {

@@ -91,6 +91,17 @@ describe("ListingController", () => {
     });
   });
 
+  describe("#parseUPI", () => {
+    it("returns null with non-object input", async () => {
+      assert.equal(await lc.parseUPI(), null);
+      assert.equal(await lc.parseUPI("test"), null);
+      assert.notEqual(
+        await lc.parseUPI({ latitude: 123.456789, longitude: 123.456789 }),
+        null,
+      );
+    });
+  });
+
   describe("#addData", () => {
     it("fails with bad params", async () => {
       assert.equal(await lc.addData().catch(() => false), false);
