@@ -1,5 +1,5 @@
 const web3 = require("web3");
-const listingFields = require("./assets/listing-fields");
+const listingFields = require("./listing-fields");
 
 const toCamelCase = (str = "") =>
   str.replace(/[-_]([a-z])/g, g => g[1].toUpperCase());
