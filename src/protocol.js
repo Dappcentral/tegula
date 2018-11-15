@@ -71,7 +71,7 @@ module.exports = class Protocol {
   }
 
   async batchAddListings(listings = []) {
-    return Promise.all(listings.map(this.addListing.bind(this)));
+    return Promise.all(listings.map(listing => this.addListing(listing)));
   }
 
   async getListings(ek, userAddress) {
