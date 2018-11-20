@@ -1,6 +1,8 @@
-# The Imbrexer Protocol
+<img src="https://s3.amazonaws.com/imbrex-bucket/img/imbrex_lettermark_logo.png" width="200">
 
-The Imbrexer Protocol is a low level abstraction layer for securely decentralizing the world's listing data. The core of the package is three main classes:
+# The imbrex Protocol
+
+The imbrex Protocol is a low level abstraction layer for securely decentralizing the world's listing data, developed and maintained by [imbrex](https://imbrex.io). The core of the package is three main classes:
 
 1. `Decentralizer`: the raw connection layer enabling adding and retrieving data directly to IPFS as well as in a structured event log via OrbitDB on IPFS
 2. `Encrypter`: the encryption layer that securely encrypts/decrypts JSON data with a given key
