@@ -1,7 +1,7 @@
 {
-  "name": "imbrexer",
+  "name": "tegula",
   "version": "0.3.3",
-  "description": "The Imbrexer Protocol",
+  "description": "Tegula",
   "main": "dist/index.min.js",
   "scripts": {
     "build": "gulp",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dappcentral/protocol.git"
+    "url": "git+https://github.com/dappcentral/tegula.git"
   },
   "author": "Brock Haugen <brock@haugen.io>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dappcentral/protocol/issues"
+    "url": "https://github.com/dappcentral/tegula/issues"
   },
-  "homepage": "https://github.com/dappcentral/protocol#readme",
+  "homepage": "https://github.com/dappcentral/tegula#readme",
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/plugin-transform-runtime": "^7.1.0",

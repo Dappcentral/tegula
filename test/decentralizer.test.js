@@ -25,7 +25,7 @@ describe("Decentralizer", () => {
         },
       },
       orbitDbOptions: {
-        LOG_DATABASE: "imbrexer-logs",
+        LOG_DATABASE: "tegula-logs",
       },
     });
   });

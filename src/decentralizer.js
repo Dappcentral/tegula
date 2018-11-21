@@ -16,7 +16,7 @@ module.exports = class Decentralizer {
       },
       orbitDbOptions: {
         // this is our default log database
-        LOG_DATABASE: "imbrexer-logs",
+        LOG_DATABASE: "tegula-logs",
         ...config.orbitdbOptions,
       },
     };

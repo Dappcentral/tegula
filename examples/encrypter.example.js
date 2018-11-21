@@ -1,9 +1,9 @@
-const Protocol = require("../src");
+const Tegula = require("../src");
 
 const run = async () => {
   try {
     // initialize
-    const e = new Protocol()._encrypter;
+    const e = new Tegula()._encrypter;
     await e.initialize();
 
     const ek = await e.generate();
