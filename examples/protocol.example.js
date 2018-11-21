@@ -1,10 +1,10 @@
 const web3 = require("web3");
-const Protocol = require("../src");
+const Tegula = require("../src");
 
 const run = async () => {
   try {
     // initialize
-    const p = new Protocol();
+    const p = new Tegula();
     await p.initialize();
 
     // get and set a new encryption key

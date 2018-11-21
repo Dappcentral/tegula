@@ -1,7 +1,7 @@
-const Protocol = require("../src/protocol");
+const Tegula = require("../src/tegula");
 
-describe("Protocol", () => {
-  const p = new Protocol({
+describe("Tegula", () => {
+  const p = new Tegula({
     decentralizer: {
       orbitdbOptions: {
         LOG_DATABASE: `test-logs-${Date.now()}`,
@@ -22,12 +22,12 @@ describe("Protocol", () => {
   });
 
   it("accepts a configuration", () => {
-    const np = new Protocol({ configTest: true });
+    const np = new Tegula({ configTest: true });
     assert.deepStrictEqual(np.config, { configTest: true });
   });
 
   describe("#setUserAddress", () => {
-    it("can set the protocol user address", async () => {
+    it("can set the tegula user address", async () => {
       assert.equal(p._userAddress, undefined);
       await p.setUserAddress(userAddress);
       assert.equal(p._userAddress, userAddress);
@@ -35,7 +35,7 @@ describe("Protocol", () => {
   });
 
   describe("#setEncryptionKey", () => {
-    it("can set the protocol encryption key", async () => {
+    it("can set the tegula encryption key", async () => {
       assert.equal(p._encryptionKey, undefined);
       await p.setEncryptionKey(ek);
       assert.equal(p._encryptionKey, ek);

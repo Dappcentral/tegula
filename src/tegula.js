@@ -3,7 +3,7 @@ const Encrypter = require("./encrypter");
 const Identifier = require("./identifier");
 const ListingController = require("./listing-controller");
 
-module.exports = class Protocol {
+module.exports = class Tegula {
   constructor(config) {
     this.config = config || {};
 

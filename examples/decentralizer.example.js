@@ -1,9 +1,9 @@
-const Protocol = require("../src");
+const Tegula = require("../src");
 
 const run = async () => {
   try {
     // initialize
-    const d = new Protocol()._decentralizer;
+    const d = new Tegula()._decentralizer;
     await d.initialize();
 
     // add data

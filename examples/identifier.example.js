@@ -1,9 +1,9 @@
-const Protocol = require("../src");
+const Tegula = require("../src");
 
 const run = async () => {
   try {
     // initialize
-    const i = new Protocol()._identifer;
+    const i = new Tegula()._identifer;
     await i.initialize();
 
     // normalize address

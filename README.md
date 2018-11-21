@@ -1,23 +1,23 @@
 <img src="https://s3.amazonaws.com/imbrex-bucket/img/imbrex_lettermark_logo.png" width="200">
 
-# The imbrex Protocol
+# Tegula
 
-The imbrex Protocol is a low level abstraction layer for securely decentralizing the world's listing data, developed and maintained by [imbrex](https://imbrex.io). The core of the package is three main classes:
+Tegula is a low level abstraction layer for securely decentralizing the world's listing data, developed and maintained by [imbrex](https://imbrex.io). The core of the package is three main classes:
 
 1. `Decentralizer`: the raw connection layer enabling adding and retrieving data directly to IPFS as well as in a structured event log via OrbitDB on IPFS
 2. `Encrypter`: the encryption layer that securely encrypts/decrypts JSON data with a given key
 3. `Identifier`: the identification layer for uniquely, and consistently, generating UPIs (Universal Property Identifiers) for listings based on their geo-coordinates
 
-These three classes come together in the `ListingController` and then abstracted one step further in the `Protocol` class (which is what gets exposed by default). At the `Protocol` level the three agnostic classes listed above are wrapped in listing-specific logic that enables the easy addition and retrieval of listings given a user address and an encryption key.
+These three classes come together in the `ListingController` and then abstracted one step further in the `Tegula` class (which is what gets exposed by default). At the `Tegula` level the three agnostic classes listed above are wrapped in listing-specific logic that enables the easy addition and retrieval of listings given a user address and an encryption key.
 
 ---
 
 ## Installation
 
-This package can be install via [npm](https://www.npmjs.com/package/imbrexer)
+This package can be install via [npm](https://www.npmjs.com/package/tegula)
 
 ```bash
-npm install --save imbrexer
+npm install --save tegula
 ```
 
 ---
@@ -28,17 +28,17 @@ npm install --save imbrexer
 
 ```js
 // import the package
-const Protocol = require("imbrexer");
+const Tegula = require("tegula");
 // setup a new class instance
-const protocol = new Protocol();
+const tegula = new Tegula();
 
 // initialize everything
-protocol.initialize().then(() => {
+tegula.initialize().then(() => {
   // now you're good to go!
 });
 
 // OR if you're inside an async method already
-await protocol.initialize();
+await tegula.initialize();
 ```
 
 #### Set Address and Encryption Keys
@@ -46,9 +46,9 @@ await protocol.initialize();
 ```js
 // ...
 
-protocol.initialize().then(async () => {
-  await protocol.setUserAddress("0xAbC...");
-  await protocol.setEncryptionKey("some-encryption-key");
+tegula.initialize().then(async () => {
+  await tegula.setUserAddress("0xAbC...");
+  await tegula.setEncryptionKey("some-encryption-key");
 });
 ```
 
@@ -57,11 +57,11 @@ protocol.initialize().then(async () => {
 ```js
 // ...
 
-protocol.initialize().then(async () => {
+tegula.initialize().then(async () => {
   // ...
 
   const listingData = { latitude: 123.456789, longitude: 123.456789, ... };
-  await protocol.addListing(listingData);
+  await tegula.addListing(listingData);
 });
 ```
 
@@ -69,13 +69,13 @@ protocol.initialize().then(async () => {
 
 ```js
 // ...
-protocol.initialize().then(async () => {
+tegula.initialize().then(async () => {
   // ...
 
   // Option 1: use previously set encryption key and user address values
-  const listings = await protocol.getListings();
+  const listings = await tegula.getListings();
   // Option 2: pass in one-time use
-  const listings = await protocol.getListings("some-encryption-key", "0xAbC");
+  const listings = await tegula.getListings("some-encryption-key", "0xAbC");
 });
 ```
 
@@ -117,7 +117,7 @@ This project is split into a few main directories:
 ├──── decentralizer.example.js
 ├──── encrypter.example.js
 ├──── identifier.example.js
-├──── protocol.example.js
+├──── tegula.example.js
 ├── node_modules/
 ├── src/
 ├──── decentralizer.js
@@ -125,14 +125,14 @@ This project is split into a few main directories:
 ├──── identifier.js
 ├──── index.js
 ├──── listing-controller.js
-├──── protocol.js
+├──── tegula.js
 ├── test/
 ├──── _setup.js
 ├──── decentralizer.test.js
 ├──── encrypter.test.js
 ├──── identifier.test.js
 ├──── listing-controller.test.js
-├──── protocol.test.js
+├──── tegula.test.js
 ├── .eslintignore
 ├── .eslintrc.json
 ├── .npmignore
@@ -149,7 +149,7 @@ This project is split into a few main directories:
 
 ## Tests
 
-Every logic file in the `src/` directory has a corresponding test in the `test/` directory. Each method is unit tested which consequently results in cross-class integration tests with the `Protocol` and `ListingController` class tests.
+Every logic file in the `src/` directory has a corresponding test in the `test/` directory. Each method is unit tested which consequently results in cross-class integration tests with the `Tegula` and `ListingController` class tests.
 
 ```bash
 npm test
