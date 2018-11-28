@@ -8,15 +8,26 @@ module.exports = class Decentralizer {
     this.config = {
       ...config,
       ipfsOptions: {
-        EXPIREMENTAL: {
+        EXPERIMENTAL: {
           // OrbitDb relies on IPFS pub/sub for p2p connections
           pubsub: true,
+        },
+        config: {
+          Addresses: {
+            Swarm: [
+              "/dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star",
+            ],
+          },
+          Bootstrap: [
+            "/dns4/ipfs.imbrex.io/tcp/443/ipfs/QmQhNi38ZqXX9g8gGbZLmKyc2URtdb5YzgvuQTnmmEUmHZ",
+          ],
         },
         ...config.ipfsOptions,
       },
       orbitDbOptions: {
         // this is our default log database
-        LOG_DATABASE: "tegula-logs",
+        LOG_DATABASE:
+          "/orbitdb/QmaDWAbLHam5MnewNtvG2t3XNiTLDngVF1AAQkux1vhK3y/tegula-logs",
         ...config.orbitdbOptions,
       },
     };
@@ -48,6 +59,7 @@ module.exports = class Decentralizer {
       // define the specific logDb
       this._logDb = await this._orbitDb.log(
         this.config.orbitDbOptions.LOG_DATABASE,
+        { localOnly: false, sync: true },
       );
 
       // load the logDb so we have it
