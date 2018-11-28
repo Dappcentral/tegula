@@ -6,6 +6,9 @@ const run = async () => {
   await tegula.initialize();
   console.log("Initialized!");
 
+  const addr = tegula._decentralizer._logDb.address.toString();
+  console.log("Tegula logs at", addr);
+
   const checkLogs = async () => {
     const logs = await tegula._decentralizer.retrieveLogs({ limit: -1 });
     console.log("replicated count", logs.length);
@@ -20,9 +23,6 @@ const run = async () => {
     await checkLogs();
     await checkPeers();
   });
-
-  const addr = tegula._decentralizer._logDb.address.toString();
-  console.log("Tegula logs at", addr);
 
   setTimeout(async () => {
     await checkPeers();
