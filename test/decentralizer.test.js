@@ -18,16 +18,10 @@ describe("Decentralizer", () => {
 
   it("has a default configruation", () => {
     const ne = new Decentralizer();
-    assert.deepStrictEqual(ne.config, {
-      ipfsOptions: {
-        EXPIREMENTAL: {
-          pubsub: true,
-        },
-      },
-      orbitDbOptions: {
-        LOG_DATABASE: "tegula-logs",
-      },
-    });
+    assert.deepStrictEqual(Object.keys(ne.config), [
+      "ipfsOptions",
+      "orbitDbOptions",
+    ]);
   });
 
   it("can be initialized", async function initializeTest() {

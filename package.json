@@ -7,6 +7,7 @@
     "build": "gulp",
     "lint": "eslint . --fix",
     "prepublish": "npm run build",
+    "replicator": "node replicator.js",
     "test": "mocha --require test/_setup.js test/*.test.js --exit"
   },
   "repository": {
