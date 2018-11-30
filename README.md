@@ -1,6 +1,5 @@
-<!-- <img src="https://s3.amazonaws.com/imbrex-bucket/img/imbrex_lettermark_logo.png" width="200"> -->
-<!-- ![alt text](tegula-logo.png { width: 200px; }) -->
 <img src="tegula-logo.png" width="200">
+
 # Tegula
 
 Tegula is a low level abstraction layer for securely decentralizing the world's listing data, developed and maintained by [imbrex](https://imbrex.io). The core of the package is three main classes:
