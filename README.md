@@ -1,4 +1,4 @@
-<img src="https://s3.amazonaws.com/imbrex-bucket/img/imbrex_lettermark_logo.png" width="200">
+<img src="tegula-logo.png" width="200">
 
 # Tegula
 
