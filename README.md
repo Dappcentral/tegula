@@ -154,3 +154,22 @@ Every logic file in the `src/` directory has a corresponding test in the `test/`
 ```bash
 npm test
 ```
+
+## FAQ
+
+##### What does it mean if I get ipfs-block-service error? 
+
+```
+/tegula/node_modules/ipfs-block-service/src/index.js:64
+      this._repo.blocks.put(block, callback)
+                        ^
+
+TypeError: Cannot read property 'put' of undefined
+```
+
+You're having a setup issue with IPFS, 
+"... in order for me to solve it i deleted a file called repo.lock located in .jsipfs folder at the home directory". Read more <a href="https://github.com/ipfs/js-ipfs/issues/1194">here</a>.
+
+
+
+
