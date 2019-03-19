@@ -7,21 +7,21 @@ const run = async () => {
     await i.initialize();
 
     // normalize address
-    const normalized = await i.normalizeAddress(
+    /*const normalized = await i.normalizeAddress(
       "123 APPLE STREET, new york, ny 12345",
-    );
-    console.log(normalized);
+    );*/
+    //console.log(normalized);
 
     // get coordinates
-    const {
+    /*const {
       latitude,
       longitude,
       unitNumber,
     } = await i.parseAddressToCoordinates(normalized);
-    console.log(latitude, longitude, unitNumber);
+    console.log(latitude, longitude, unitNumber);*/
 
     // get UPI hash
-    const hash = await i.parseCoordinatesToUPI(latitude, longitude, unitNumber);
+    const hash = await i.parseCoordinatesToUPI(42.2566425, -83.7830953, 'Alder');
     console.log(hash);
 
     // all together now

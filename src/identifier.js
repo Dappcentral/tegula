@@ -1,4 +1,4 @@
-const web3 = require("web3");
+const utils = require("web3-utils");
 
 module.exports = class Identifier {
   // use contractor class to define the config values
@@ -47,7 +47,7 @@ module.exports = class Identifier {
     const UPI = [parsedLat, parsedLng, parsedUnit].join("||");
 
     // return the sha3 hash for consistent lengths
-    return web3.utils.sha3(UPI);
+    return utils.sha3(UPI);
   }
 
   // quick normalization helper

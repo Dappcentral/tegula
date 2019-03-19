@@ -1,4 +1,4 @@
-const web3 = require("web3");
+const utils = require("web3-utils");
 const listingFields = require("./listing-fields");
 
 const toCamelCase = (str = "") =>
@@ -82,7 +82,7 @@ module.exports = class ListingController {
   // method to validate userAddress
   // eslint-disable-next-line class-methods-use-this
   async validateUserAddress(userAddress) {
-    return web3.utils.isAddress(userAddress);
+    return utils.isAddress(userAddress);
   }
 
   // method to compute the UPI of given data
