@@ -1,5 +1,5 @@
 const CryptoJS = require("crypto-js");
-const web3 = require("web3");
+const utils = require("web3-utils");
 
 module.exports = class Encrypter {
   // use contractor class to define the config values
@@ -60,6 +60,6 @@ module.exports = class Encrypter {
   // method to generate a new encryption key
   // eslint-disable-next-line class-methods-use-this
   async generate() {
-    return web3.utils.randomHex(32);
+    return utils.randomHex(32);
   }
 };
