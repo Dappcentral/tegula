@@ -18,7 +18,7 @@ const run = async () => {
 
     // add listing
     const listingData = { latitude: 124.456789, longitude: 113.456789, unitNumber: '4C', price: 2300000 };
-    //await p.addListing(listingData);
+    await p.addListing(listingData);
 
     // fetch list of listings
     const logs = await p.getLogsByAddress(address);

@@ -26,7 +26,7 @@ const run = async () => {
 
     // all together now
     const UPI = await i.parseAddressToUPI("123 APPLE ST. NY, NY");
-    //console.log(UPI);
+    console.log(UPI);
   } catch (err) {
     console.log(err);
   }
