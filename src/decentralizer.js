@@ -8,10 +8,6 @@ module.exports = class Decentralizer {
     this.config = {
       ...config,
       ipfsOptions: {
-        EXPERIMENTAL: {
-          // OrbitDb relies on IPFS pub/sub for p2p connections
-          pubsub: true,
-        },
         config: {
           Addresses: {
             Swarm: [
@@ -27,7 +23,8 @@ module.exports = class Decentralizer {
       orbitDbOptions: {
         // this is our default log database
         LOG_DATABASE:
-          "/orbitdb/QmaDWAbLHam5MnewNtvG2t3XNiTLDngVF1AAQkux1vhK3y/tegula-logs",
+          // "/orbitdb/QmaDWAbLHam5MnewNtvG2t3XNiTLDngVF1AAQkux1vhK3y/tegula-logs",
+          "/orbitdb/zdpuAtQ6PyiaY5PUhhRsRpFyuuKBfq5BxPUEXVctrKuLjeyjS/testing",
         ...config.orbitdbOptions,
       },
     };
@@ -46,15 +43,11 @@ module.exports = class Decentralizer {
       if (this.config.ipfsOptions.apiUri) {
         this._ipfs = IpfsApi(this.config.ipfsOptions.apiUri);
       } else {
-        this._ipfs = new IPFS(this.config.ipfsOptions);
-        await new Promise((res, rej) => {
-          this._ipfs.on("error", rej);
-          this._ipfs.on("ready", res);
-        });
+        this._ipfs = await IPFS.create(this.config.ipfsOptions);
       }
 
       // create the orbitDb instance
-      this._orbitDb = new OrbitDb(this._ipfs);
+      this._orbitDb = await OrbitDb.createInstance(this._ipfs);
 
       // define the specific logDb
       this._logDb = await this._orbitDb.log(
