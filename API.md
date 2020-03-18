@@ -36,14 +36,10 @@ Default and available options:
   ipfsOptions: {
     // all configuration options for IPFS are available here:
     // https://github.com/ipfs/js-ipfs#ipfs-constructor
-    EXPIREMENTAL: {
-      // this is required for OrbitDB to work
-      pubsub: true
-    }
   },
-  orbitDbOptions: {
-    // only change this if you want to completely silo your data
-    LOG_DATABASE: "tegula-logs"
+  orbitdbOptions: {
+    // you SHOULD change this to work with your own data
+    LOG_DATABASE: "/orbitdb/:orbitdb-host/tegula-logs"
   }
 }
 ```

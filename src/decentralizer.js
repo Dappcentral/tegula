@@ -14,13 +14,10 @@ module.exports = class Decentralizer {
               "/dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star",
             ],
           },
-          // Bootstrap: [
-          //   "/dns4/ipfs.imbrex.io/tcp/443/ipfs/QmQhNi38ZqXX9g8gGbZLmKyc2URtdb5YzgvuQTnmmEUmHZ",
-          // ],
         },
         ...config.ipfsOptions,
       },
-      orbitDbOptions: {
+      orbitdbOptions: {
         // NOTE: this needs to be overriden
         LOG_DATABASE: `tegula-logs-${Math.random()}`,
         ...config.orbitdbOptions,
@@ -49,7 +46,7 @@ module.exports = class Decentralizer {
 
       // define the specific logDb
       this._logDb = await this._orbitDb.log(
-        this.config.orbitDbOptions.LOG_DATABASE,
+        this.config.orbitdbOptions.LOG_DATABASE,
         { localOnly: false, sync: true },
       );
       console.log("OrbitDB synced with:", this._logDb.address.toString());
@@ -62,6 +59,7 @@ module.exports = class Decentralizer {
       return true;
     } catch (err) {
       // if any of the above fails, reject the promise
+      console.log(err);
       return err;
     }
   }

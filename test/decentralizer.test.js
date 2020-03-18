@@ -20,7 +20,7 @@ describe("Decentralizer", () => {
     const ne = new Decentralizer();
     assert.deepStrictEqual(Object.keys(ne.config), [
       "ipfsOptions",
-      "orbitDbOptions",
+      "orbitdbOptions",
     ]);
   });
 
