@@ -75,10 +75,9 @@ describe("Decentralizer", () => {
       assert.notEqual(await d.addLog({ a: "b" }), false);
     });
 
-    it("returns an IPFS hash on success", async () => {
+    it("returns a hash on success", async () => {
       const hash = await d.addLog({ a: "b" });
       assert.equal(!!hash, true);
-      assert.equal(hash.startsWith("Qm"), true);
     });
   });
 
