@@ -11,7 +11,7 @@ const run = async () => {
     // const normalized = await i.normalizeAddress(
     //   "123 APPLE STREET, new york, ny 12345",
     // );
-    //console.log(normalized);
+    // console.log(normalized);
 
     // NOTE: disabled without Google Maps API Key
     // get coordinates
@@ -23,7 +23,11 @@ const run = async () => {
     // console.log(latitude, longitude, unitNumber);
 
     // get UPI hash
-    const hash = await i.parseCoordinatesToUPI(42.2566425, -83.7830953, 'Alder');
+    const hash = await i.parseCoordinatesToUPI(
+      42.2566425,
+      -83.7830953,
+      "Alder",
+    );
     console.log("UPI from coordinates:", hash);
 
     // NOTE: disabled without Google Maps API Key
