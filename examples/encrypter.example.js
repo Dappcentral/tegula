@@ -7,14 +7,14 @@ const run = async () => {
     await e.initialize();
 
     const ek = await e.generate();
-    console.log(ek);
+    console.log("Encryption Key:", ek);
 
     const data = { a: "value 1", b: "value 2" };
     const encrypted = await e.encrypt(ek, data);
-    console.log(encrypted);
+    console.log("Encrypted data:", encrypted);
 
     const decrypted = await e.decrypt(ek, encrypted);
-    console.log(decrypted);
+    console.log("Decrypted data:", decrypted);
   } catch (err) {
     console.log(err);
   }

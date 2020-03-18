@@ -14,17 +14,15 @@ module.exports = class Decentralizer {
               "/dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star",
             ],
           },
-          Bootstrap: [
-            "/dns4/ipfs.imbrex.io/tcp/443/ipfs/QmQhNi38ZqXX9g8gGbZLmKyc2URtdb5YzgvuQTnmmEUmHZ",
-          ],
+          // Bootstrap: [
+          //   "/dns4/ipfs.imbrex.io/tcp/443/ipfs/QmQhNi38ZqXX9g8gGbZLmKyc2URtdb5YzgvuQTnmmEUmHZ",
+          // ],
         },
         ...config.ipfsOptions,
       },
       orbitDbOptions: {
-        // this is our default log database
-        LOG_DATABASE:
-          // "/orbitdb/QmaDWAbLHam5MnewNtvG2t3XNiTLDngVF1AAQkux1vhK3y/tegula-logs",
-          "/orbitdb/zdpuAtQ6PyiaY5PUhhRsRpFyuuKBfq5BxPUEXVctrKuLjeyjS/testing",
+        // NOTE: this needs to be overriden
+        LOG_DATABASE: `tegula-logs-${Math.random()}`,
         ...config.orbitdbOptions,
       },
     };
@@ -54,6 +52,7 @@ module.exports = class Decentralizer {
         this.config.orbitDbOptions.LOG_DATABASE,
         { localOnly: false, sync: true },
       );
+      console.log("OrbitDB synced with:", this._logDb.address.toString());
 
       // load the logDb so we have it
       await this._logDb.load();
@@ -84,11 +83,8 @@ module.exports = class Decentralizer {
       return false;
     }
 
-    // convert stringified data to buffer
-    const content = this._ipfs.types.Buffer.from(data);
-
     // add content and return hash
-    const [{ hash }] = await this._ipfs.files.add(content);
+    const [{ hash }] = await this._ipfs.add(data);
     return hash;
   }
 
@@ -100,7 +96,7 @@ module.exports = class Decentralizer {
     }
 
     // fetch the data from ipfs
-    return this._ipfs.files.cat(hash);
+    return this._ipfs.cat(hash);
   }
 
   // method to add logs
