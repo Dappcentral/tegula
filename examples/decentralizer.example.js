@@ -10,18 +10,18 @@ const run = async () => {
     const hash = await d.addData(
       JSON.stringify({ key1: "value1", key2: "value2" }),
     );
-    console.log(hash);
+    console.log("\nAdded data hash:", hash);
 
     // retrieve data
     const data = await d.retrieveData(hash);
-    console.log(JSON.parse(data));
+    console.log("Retrieved data:", JSON.parse(data));
 
     // add log
     await d.addLog({ id: "some-id", hash, metaKey: "meta-value" });
 
     // retrieve logs
     const logs = await d.retrieveLogs({ limit: 1 });
-    console.log(logs.pop());
+    console.log("Retrieved log:", logs.pop());
   } catch (err) {
     console.log(err);
   }
