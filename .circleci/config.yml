@@ -22,12 +22,19 @@ jobs:
             - v1-dependencies-
 
       - run: npm install
+
       - run:
           name: Lint
           command: npm run lint
-      # - run:
-      #     name: Run tests
-      #     command: npm test
+
+      - run:
+          name: Run unit tests
+          command: npm test
+
+      - run:
+          name: Run contract tests
+          command: npm run test-contracts
+
       - run:
           name: Build
           command: npm run build
@@ -40,6 +47,7 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths: .
+
   deploy:
     <<: *defaults
     steps:

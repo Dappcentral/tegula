@@ -8,7 +8,8 @@
     "lint": "eslint . --fix",
     "prepublish": "npm run build",
     "replicator": "node replicator.js",
-    "test": "mocha --require test/_setup.js test/*.test.js --exit"
+    "test": "mocha --require test/_setup.js test/*.test.js --exit",
+    "test-contracts": "cd contracts && truffle test && cd .."
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "eslint-loader": "^3.0.3",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-prettier": "^3.1.2",
+    "expect": "^25.4.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-rename": "^2.0.0",
@@ -38,7 +40,8 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "mocha": "^7.1.0",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "truffle": "^5.1.23"
   },
   "dependencies": {
     "@babel/runtime": "^7.8.7",
